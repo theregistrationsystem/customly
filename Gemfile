@@ -12,3 +12,6 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
+# group :development, :test do
+#   gem 'pry-rails', '0.3.2'
+# end

@@ -1,6 +1,6 @@
-class CreateCustomlyFields < ActiveRecord::Migration
+class CreateCustomFields < ActiveRecord::Migration
   def change
-    create_table :customly_fields do |t|
+    create_table :custom_fields do |t|
       t.string :name                                                           
       t.string :label                                                        
       t.string :instructions             
@@ -10,8 +10,9 @@ class CreateCustomlyFields < ActiveRecord::Migration
       t.integer :position                                            
       t.string :validation                                         
       t.string :default_value  , default: ""    
-      t.references :scope, polymorphic: true
-      t.boolean :editable      , default: true     
+      t.references :parent     , polymorphic: true
+      t.boolean :system        , default: false     
+      t.boolean :private       , default: false
       t.timestamps
     end
   end

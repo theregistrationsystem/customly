@@ -1,3 +1,7 @@
 = Customly
 
 This project rocks and uses MIT-LICENSE.
+
+Install migrations
+
+`rake customly_engine:install:migrations`
