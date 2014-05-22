@@ -25,7 +25,7 @@ module Customly
 
       end
 
-      field + (form.hidden_field :custom_field_id, value: custom_field.id)
+      field + (form.hidden_field :custom_field_id, value: custom_field.id) + (form.hidden_field :id, value: cfv.id)
     end
   end
 end

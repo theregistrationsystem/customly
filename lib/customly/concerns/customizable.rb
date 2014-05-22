@@ -31,6 +31,14 @@ module Customly
           custom_field_values.build(:customized => self, :custom_field => cf, :value => cf.default_value)
         end
       end
+
+      def find_or_create_custom_field_values!(skopes, show_private: false)
+        available_custom_fields(skopes, show_private: show_private).map do |cf|
+          custom_field_values.detect { |v| v.custom_field == cf } ||
+          custom_field_values.create(:customized => self, :custom_field => cf, :value => cf.default_value)
+        end
+      end
+
       
     end
   end

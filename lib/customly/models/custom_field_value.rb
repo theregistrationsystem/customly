@@ -6,7 +6,6 @@ module Customly
     belongs_to :customized, polymorphic: true
 
     #== VALIDATIONS
-    validates :value, presence: true
     validates :customized, presence: true
     validates :custom_field, presence: true
     validate { (Customly.configuration.validations[:custom_field_value] || []).each { |blk| blk.call self } }
