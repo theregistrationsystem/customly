@@ -5,7 +5,7 @@ class CreateCustomFields < ActiveRecord::Migration
       t.string :label                                                        
       t.string :instructions             
       t.string :field_type                                         
-      t.text   :possible_values                          
+      t.text   :options                          
       t.boolean :is_required   , default: false
       t.integer :position                                            
       t.string :validation                                         

@@ -20,7 +20,7 @@ module Customly
         form.text_field :value, {value: cfv.value, required: custom_field.is_required?}.merge(html_options)
 
       when :select
-        options = options_for_select(custom_field.possible_values || [], (cfv.value || custom_field.default_value))
+        options = options_for_select(custom_field.options || [], (cfv.value || custom_field.default_value))
         form.select :value, options , {prompt: ""}, {required: custom_field.is_required?}.merge(html_options)
 
       end

@@ -5,7 +5,7 @@ module Customly
                   :input_type,
                   :validation,
                   :default_value,
-                  :possible_values,
+                  :options,
                   :html_options
 
     def initialize

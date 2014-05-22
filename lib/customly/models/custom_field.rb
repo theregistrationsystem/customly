@@ -14,7 +14,7 @@ module Customly
     validate { (Customly.configuration.validations[:custom_field] || []).each { |blk| blk.call self } }
 
     #== ATTRIBUTES
-    serialize :possible_values
+    serialize :options
 
     #== SCOPES
     scope :not_in_skope, -> (skope) do
