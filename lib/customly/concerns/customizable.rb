@@ -19,7 +19,8 @@ module Customly
     module InstanceMethods
 
       def available_custom_fields(skopes, show_private: false)
-        fields = Customly::CustomField.joins(:custom_field_skopes).where(custom_field_skopes: {skope: skopes})
+        wc = skopes.map {|s| "(custom_field_skopes.skope_type = '#{s.class.to_s}' AND custom_field_skopes.skope_id = #{s.id})"}.join(' OR ')
+        fields = Customly::CustomField.joins(:custom_field_skopes).where(wc)
         fields = fields.where(private: false) unless show_private
         fields.order('position')
       end
