@@ -11,7 +11,7 @@ module Customly
     validates :custom_field, presence: true
     validate { (Customly.configuration.validations[:custom_field_value] || []).each { |blk| blk.call self } }
 
-
+    delegate :label, to: :custom_field
 
   end
 end

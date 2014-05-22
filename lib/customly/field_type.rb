@@ -11,6 +11,7 @@ module Customly
     def initialize
       @input_type = :text_field
       @default_value = ""
+      @html_options = {}
     end
 
     def self.find_by_key(k)
