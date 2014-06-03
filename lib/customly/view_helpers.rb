@@ -16,13 +16,11 @@ module Customly
       html_options.merge!(ft_html_options)
 
       field = case ft.input_type
-      when :text_field
-        form.text_field :value, {value: cfv.value, required: custom_field.is_required?}.merge(html_options)
-
       when :select
         options = options_for_select(custom_field.options || [], (cfv.value || custom_field.default_value))
         form.select :value, options , {prompt: ""}, {required: custom_field.is_required?}.merge(html_options)
-
+      else
+        form.text_field :value, {value: cfv.value, required: custom_field.is_required?}.merge(html_options)        
       end
 
       field + (form.hidden_field :custom_field_id, value: custom_field.id) + (form.hidden_field :id, value: cfv.id)
