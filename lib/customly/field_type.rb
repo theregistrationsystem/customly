@@ -6,7 +6,8 @@ module Customly
                   :validation,
                   :default_value,
                   :options,
-                  :html_options
+                  :html_options,
+                  :render
 
     def initialize
       @input_type = :text_field

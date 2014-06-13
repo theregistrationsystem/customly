@@ -15,10 +15,18 @@ module Customly
       html_options[:class] = "#{ft_html_options.delete[:class]} #{html_options[:class]}" if html_options[:class] && ft_html_options[:class]
       html_options.merge!(ft_html_options)
 
+      if ft.render.present?
+        return ft.render.call(form, cfv)
+      end
+
       field = case ft.input_type
       when :select
         options = options_for_select(custom_field.options || [], (cfv.value || custom_field.default_value))
         form.select :value, options , {prompt: ""}, {required: custom_field.is_required?}.merge(html_options)
+
+      when :text_area
+        form.text_area :value, {value: cfv.value, required: custom_field.is_required?}.merge(html_options)        
+
       else
         form.text_field :value, {value: cfv.value, required: custom_field.is_required?}.merge(html_options)        
       end
