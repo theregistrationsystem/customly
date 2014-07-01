@@ -7,11 +7,13 @@ module Customly
                   :default_value,
                   :options,
                   :html_options,
-                  :render
+                  :render,
+                  :static
 
     def initialize
       @input_type = :text_field
       @default_value = ""
+      @static = false
       @html_options = {}
     end
 
@@ -21,6 +23,10 @@ module Customly
 
     def self.find_by_key(k)
       Customly.configuration.field_types[k.to_sym]
+    end
+
+    def custom_render?
+      render.present? && render.is_a?(Proc)
     end
   end
 end

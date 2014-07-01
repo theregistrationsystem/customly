@@ -24,7 +24,9 @@ module Customly
     :text_area,
     :select,
     :radio,
-    :check_box
+    :check_box,
+    :date_field,
+    :custom
   ]
 
   class Engine < ::Rails::Engine

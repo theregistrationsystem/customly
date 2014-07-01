@@ -3,7 +3,7 @@ module Customly
 
     #== ASSOCIATIONS
     belongs_to :parent, polymorphic: true
-    has_many :custom_field_values
+    has_many :custom_field_values, inverse_of: :custom_field
     has_many :custom_field_skopes
 
     #== VALIDATIONS

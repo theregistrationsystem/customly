@@ -1,37 +1,42 @@
 module Customly
   module ViewHelpers
-
     def custom_field_types
       Customly.configuration.field_types
     end
 
     def custom_field_tag(form, cfv, html_options = {})
-      custom_field = cfv.custom_field
-      label_text = custom_field.label
+      cf = cfv.custom_field
       
-      ft = FieldType.find_by_key(custom_field.field_type)
+      ft = FieldType.find_by_key(cf.field_type)
 
       ft_html_options = ft.html_options || {}
       html_options[:class] = "#{ft_html_options.delete[:class]} #{html_options[:class]}" if html_options[:class] && ft_html_options[:class]
       html_options.merge!(ft_html_options)
 
-      if ft.render.present?
-        return ft.render.call(form, cfv)
-      end
+      field = nil
 
-      field = case ft.input_type
-      when :select
-        options = options_for_select(custom_field.options || [], (cfv.value || custom_field.default_value))
-        form.select :value, options , {prompt: ""}, {required: custom_field.is_required?}.merge(html_options)
-
-      when :text_area
-        form.text_area :value, {value: cfv.value, required: custom_field.is_required?}.merge(html_options)        
-
+      if ft.custom_render?
+        field = self.instance_exec(form, cfv, &ft.render)
       else
-        form.text_field :value, {value: cfv.value, required: custom_field.is_required?}.merge(html_options)        
+        field = case ft.input_type
+        when :select
+          options = options_for_select(cf.options || [], (cfv.value || cf.default_value))
+          form.select :value, options , {prompt: ""}, {required: cf.is_required?}.merge(html_options)
+
+        when :text_area
+          form.text_area :value, {value: cfv.value, required: cf.is_required?}.merge(html_options)        
+
+        else
+          form.text_field :value, {value: cfv.value, required: cf.is_required?}.merge(html_options)        
+        end
       end
 
-      field + (form.hidden_field :custom_field_id, value: custom_field.id) + (form.hidden_field :id, value: cfv.id)
+      result = field
+      unless ft.static
+        result += (form.hidden_field :custom_field_id, value: cf.id) 
+        result += (form.hidden_field :id, value: cfv.id) if cfv.id.present?
+      end
+      result
     end
   end
 end
