@@ -8,7 +8,6 @@ module Customly
 
     #== VALIDATIONS
     validates :name, presence: true
-    validates :label, presence: true, uniqueness: true
     validates :field_type, presence: true
 
     validate { (Customly.configuration.validations[:custom_field] || []).each { |blk| blk.call self } }
