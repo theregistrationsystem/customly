@@ -2,7 +2,7 @@ module Customly
   class CustomFieldValue < ActiveRecord::Base
 
     #== ASSOCIATIONS
-    belongs_to :custom_field
+    belongs_to :custom_field, inverse_of: :custom_field_values
     belongs_to :customized, polymorphic: true
 
     #== VALIDATIONS

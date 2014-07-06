@@ -38,7 +38,7 @@ module Customly
 
       def find_or__custom_field_values(action, skopes, show_private: false)
         available_custom_fields(skopes, show_private: show_private).map do |cf|
-          cfv = (custom_field_values.detect { |v| v.custom_field == cf } ||
+          cfv = (custom_field_values.includes(:custom_field).detect { |v| v.custom_field == cf } ||
                  custom_field_values.send(action, :customized => self, :custom_field => cf, :value => cf.default_value))
           cfv.custom_field_skope_id = cf.custom_field_skope_id
           cfv
