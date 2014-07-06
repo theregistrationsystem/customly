@@ -8,12 +8,14 @@ module Customly
                   :options,
                   :html_options,
                   :render,
-                  :static
+                  :static,
+                  :include_blank_option
 
     def initialize
       @input_type = :text_field
       @default_value = ""
       @static = false
+      @include_blank_option = false
       @html_options = {}
     end
 
