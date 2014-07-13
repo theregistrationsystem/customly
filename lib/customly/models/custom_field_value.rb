@@ -9,8 +9,9 @@ module Customly
     validates :customized, presence: true
     validates :custom_field, presence: true
     validate { (Customly.configuration.validations[:custom_field_value] || []).each { |blk| blk.call self } }
+    validates :value, presence: true, unless: -> { !is_required || customized.try(:skip_custom_field_value_presence_validation) }
 
-    delegate :name, :label, :input_type, :field_type, to: :custom_field
+    delegate :name, :label, :input_type, :field_type, :is_required, to: :custom_field
 
     #== ATTRIBUTES
     attr_accessor :custom_field_skope_id

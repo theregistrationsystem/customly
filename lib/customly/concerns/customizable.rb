@@ -12,6 +12,22 @@ module Customly
 
           accepts_nested_attributes_for :custom_field_values
 
+          # This allows you to specify when and where custom field value
+          # presence is required.
+          attr_accessor :skip_custom_field_value_presence_validation
+          validates_associated :custom_field_values
+
+          after_validation def append_errors_from_cvfs
+            # get rid of "Custom field values is invalid"
+            errors.messages.delete :custom_field_values
+
+            custom_field_values.map do |cfv| 
+              cfv.errors.full_messages.map { |msg| msg.gsub("Value",cfv.name) } 
+            end.flatten.each do |cfv_err|
+              errors.add(:base, cfv_err)
+            end
+          end
+
         end
       end
     end
