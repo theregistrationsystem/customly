@@ -15,6 +15,18 @@ module Customly
     #== ATTRIBUTES
     serialize :options
 
+    FLAG_SEPERATOR = "~"
+
+    # ["one", "two"] => "~one~two~" 
+    def flags=(f_arr)
+      write_attribute(:flags, (FLAG_SEPERATOR + f_arr.reject(&:blank?).join(FLAG_SEPERATOR) + FLAG_SEPERATOR))
+    end
+
+    # "~one~two~" => ["one", "two"]
+    def flags
+      (attributes["flags"].blank? ? read_attribute(:flags) : attributes["flags"]).to_s.split(FLAG_SEPERATOR).reject(&:blank?)
+    end
+
     #== SCOPES
     scope :not_in_skope, -> (skope) do
      skoped_fields = skope.custom_field_skopes.map(&:custom_field_id).compact

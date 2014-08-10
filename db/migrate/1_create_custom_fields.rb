@@ -13,7 +13,11 @@ class CreateCustomFields < ActiveRecord::Migration
       t.references :parent     , polymorphic: true
       t.boolean :system        , default: false     
       t.boolean :private       , default: false
+      t.flags   :string
       t.timestamps
     end
+
+    add_index :custom_fields, :flags
+
   end
 end

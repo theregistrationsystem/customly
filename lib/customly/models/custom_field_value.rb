@@ -16,6 +16,6 @@ module Customly
     #== ATTRIBUTES
     attr_accessor :custom_field_skope_id
     serialize :value
-    
+
   end
 end
