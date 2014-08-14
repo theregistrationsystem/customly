@@ -14,8 +14,8 @@ module Customly
 
           # This allows you to specify when and where custom field value
           # presence is required.
-          attr_accessor :skip_custom_field_value_presence_validation
-          validates_associated :custom_field_values
+          attr_accessor :skip_custom_field_value_validation
+          validates_associated :custom_field_values, unless: -> {skip_custom_field_value_validation}
 
           after_validation def append_errors_from_cvfs
             # get rid of "Custom field values is invalid"
