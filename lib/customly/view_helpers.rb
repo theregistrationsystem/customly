@@ -26,7 +26,7 @@ module Customly
           field = case ft.input_type
           when :select
             options = options_for_select(cf.options || [], value)
-            form.select :value, options , {prompt: "", include_blank: ft.include_blank_option}, {required: cf.is_required?}.merge(html_options)
+            form.select :value, options , {prompt: nil, include_blank: ft.include_blank_option}, {required: cf.is_required?}.merge(html_options)
 
           when :text_area
             form.text_area :value, {value: value, required: cf.is_required?}.merge(html_options)        
