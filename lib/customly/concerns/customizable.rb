@@ -36,7 +36,11 @@ module Customly
 
       def available_custom_fields(skopes, flags: [], show_private: false)
         wc = skopes.map {|s| "(custom_field_skopes.skope_type = '#{s.class.to_s}' AND custom_field_skopes.skope_id = #{s.id})"}.join(' OR ')
-        wc += (" AND (" + flags.map {|f| "custom_fields.flags LIKE '%~#{f}%~'"}.join(" OR ") + ")") unless flags.blank?
+        unless flags.blank?
+          wc += (" AND (" + flags.map {|f| "custom_fields.flags LIKE '%~#{f}%~'"}.join(" OR ") + ")") 
+        else
+          wc += (" AND (custom_fields.flags = '~~' OR custom_fields.flags IS NULL)") 
+        end          
         fields = Customly::CustomField.joins(:custom_field_skopes)
                                       .select("custom_fields.*, custom_field_skopes.id as custom_field_skope_id")
                                       .where(wc)
