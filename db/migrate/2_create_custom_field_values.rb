@@ -7,5 +7,8 @@ class CreateCustomFieldValues < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :custom_field_values, [:customized_id, :customized_type, :custom_field_id], name: "cfv_by_customized"
+    
   end
 end

@@ -9,4 +9,8 @@ class CreateCustomFieldSkopes < ActiveRecord::Migration
       t.timestamps
     end
   end
+
+  add_index :custom_field_skopes, [:custom_field_id]
+  add_index :custom_field_skopes, [:skope_type, :skope_id, :custom_field_id], name: "custom_field_skoped_lookup"
+
 end

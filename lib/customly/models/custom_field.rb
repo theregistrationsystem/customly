@@ -19,6 +19,7 @@ module Customly
 
     # ["one", "two"] => "~one~two~" 
     def flags=(f_arr)
+      return f_arr unless f_arr.is_a?(Array)
       write_attribute(:flags, (FLAG_SEPERATOR + f_arr.reject(&:blank?).join(FLAG_SEPERATOR) + FLAG_SEPERATOR))
     end
 
