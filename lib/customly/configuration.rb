@@ -4,11 +4,13 @@ module Customly
     attr_accessor :validations
     attr_reader :field_types
     attr_accessor :flags
+    attr_accessor :paperclip_settings
 
     def initialize
       @validations = {}
       @field_types = {}
       @flags = []
+      @paperclip_settings = {}
     end
 
     def define_field_type (key, &block)

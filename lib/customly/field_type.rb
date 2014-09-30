@@ -23,6 +23,10 @@ module Customly
       [:select].include? self.input_type
     end
 
+    def supports_upload?
+      self.input_type == :file_field
+    end
+
     def self.find_by_key(k)
       Customly.configuration.field_types[k.to_sym]
     end
