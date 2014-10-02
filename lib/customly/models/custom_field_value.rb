@@ -27,7 +27,7 @@ module Customly
 
           # Provide seperate validations for different field types
 
-          Customly.configuration.paperclip_settings[:validations].each do |field_type, vals|
+          (Customly.configuration.paperclip_settings[:validations] || []).each do |field_type, vals|
             self.class.validates_attachment_size :attachment, vals[:size].merge(if: -> (cfv) {cfv.field_type.to_sym == field_type})
             self.class.validates_attachment_content_type :attachment, vals[:content_type].merge(if: -> (cfv) {cfv.field_type.to_sym == field_type})
           end
