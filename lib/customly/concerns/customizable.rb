@@ -18,8 +18,8 @@ module Customly
           validates_associated :custom_field_values, unless: -> {skip_custom_field_value_validation}
 
           after_validation def append_errors_from_cvfs
-            # get rid of "Custom field values is invalid"
-            errors.messages.delete :custom_field_values
+            # get rid of "Custom field values is invalid" vague errors
+            errors.messages.delete_if {|k| k =~ /custom_field_value/}
 
             custom_field_values.map do |cfv| 
               cfv.errors.full_messages.map { |msg| msg.gsub("Value",cfv.name) } 
