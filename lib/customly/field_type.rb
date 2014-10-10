@@ -9,6 +9,7 @@ module Customly
                   :html_options,
                   :render,
                   :static,
+                  :config,
                   :include_blank_option
 
     def initialize
@@ -17,6 +18,7 @@ module Customly
       @static = false
       @include_blank_option = false
       @html_options = {}
+      @config = {}
     end
 
     def supports_options?
