@@ -26,7 +26,7 @@ module Customly
     end
 
     def supports_upload?
-      self.input_type == :file_field
+      [:image_upload, :document_upload].include? self.input_type
     end
 
     def self.find_by_key(k)
