@@ -46,8 +46,8 @@ module Customly
         end
 
         def value
-          if FieldType.find_by_key(self.field_type).supports_upload?
-            self.attachment.try(:url)
+          if supports_upload?
+            self.send(field_type.gsub('_upload', '')).try(:url)
           else
             self.read_attribute(:value)
           end
