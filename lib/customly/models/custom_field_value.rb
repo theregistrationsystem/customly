@@ -1,3 +1,5 @@
+require 'carrierwave/orm/activerecord'
+
 module Customly
   class CustomFieldValue < ActiveRecord::Base
     include Paperclip::Glue
@@ -18,20 +20,11 @@ module Customly
     attr_accessor :custom_field_skope_id
     serialize :value
 
+    mount_uploader :document, Customly::DocumentUploader
+    mount_uploader :image, Customly::ImageUploader
+
     concerning :Uploads do
       included do
-        after_initialize def setup_attachment
-          self.class.has_attached_file :attachment, (Customly.configuration.paperclip_settings[:options] || {storage: :s3,
-                                                                                                             s3_credentials: 'config/s3.yml',
-                                                                                                             s3_protocol: "https"})
-
-          # Provide seperate validations for different field types
-
-          (Customly.configuration.paperclip_settings[:validations] || []).each do |field_type, vals|
-            self.class.validates_attachment_size :attachment, vals[:size].merge(if: -> (cfv) {cfv.field_type.to_sym == field_type})
-            self.class.validates_attachment_content_type :attachment, vals[:content_type].merge(if: -> (cfv) {cfv.field_type.to_sym == field_type})
-          end
-        end
 
         def value
           if FieldType.find_by_key(self.field_type).supports_upload?
@@ -46,3 +39,4 @@ module Customly
     
   end
 end
+

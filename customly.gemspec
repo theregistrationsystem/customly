@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "rails", "~> 4.1.0"
-  s.add_dependency "paperclip", "> 4.1"
+  s.add_dependency "carrierwave", "~> 0.10.0"
 
   s.add_development_dependency "bundler", "~> 1.6"
   s.add_development_dependency "sqlite3"

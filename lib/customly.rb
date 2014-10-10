@@ -9,6 +9,11 @@ require 'customly/concerns/parentable'
 require 'customly/concerns/skopeable'
 require 'customly/concerns/customizable'
 
+# Uploads
+require 'carrierwave'
+require 'customly/uploaders/document_uploader'
+require 'customly/uploaders/image_uploader'
+
 # Models
 require 'customly/models/custom_field'
 require 'customly/models/custom_field_skope'
@@ -16,6 +21,7 @@ require 'customly/models/custom_field_value'
 
 # Helpers
 require 'customly/view_helpers'
+
 
 module Customly
 

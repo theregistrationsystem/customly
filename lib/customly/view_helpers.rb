@@ -30,8 +30,10 @@ module Customly
 
           when :text_area
             form.text_area :value, {value: value, required: cf.is_required?}.merge(html_options)        
-          when :file_field
-            form.file_field :attachment, {value: cfv.attachment, required: cf.is_required?}.merge(html_options)
+          when :document_upload
+            form.file_field :document, {value: value, required: cf.is_required?}.merge(html_options)
+          when :image_upload
+            form.file_field :image, {value: value, required: cf.is_required?}.merge(html_options)
           else #text_field
             form.text_field :value, {value: value, required: cf.is_required?}.merge(html_options)        
           end
