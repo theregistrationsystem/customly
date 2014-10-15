@@ -44,15 +44,20 @@ module Customly
         fields = Customly::CustomField.joins(:custom_field_skopes)
                                       .select("custom_fields.*, custom_field_skopes.id as custom_field_skope_id")
                                       .where(wc)
-        fields = fields.where(private: false) unless show_private
+
+        if show_private
+          fields
+        else
+          fields.where(private: false) 
+        end
       end
       
       def find_or_build_custom_field_values(skopes, flags: [], show_private: false)
-        find_or__custom_field_values(:build, skopes, flags: flags, show_private: false)
+        find_or__custom_field_values(:build, skopes, flags: flags, show_private: show_private)
       end
 
       def find_or_create_custom_field_values!(skopes, flags: [], show_private: false)
-        find_or__custom_field_values(:create, skopes, flags: flags, show_private: false)
+        find_or__custom_field_values(:create, skopes, flags: flags, show_private: show_private)
       end
 
       private
