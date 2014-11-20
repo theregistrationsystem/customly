@@ -23,6 +23,12 @@ module Customly
     attr_accessor :custom_field_skope_id
     serialize :value
 
+    #== CALLBACKS
+
+    before_validation def sync_raw_value
+      self.raw_value = self.value
+    end
+
     def field_type_obj
       @field_type_obj ||= FieldType.find_by_key(field_type)
     end
