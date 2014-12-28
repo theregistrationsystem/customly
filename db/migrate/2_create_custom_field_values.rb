@@ -3,7 +3,7 @@ class CreateCustomFieldValues < ActiveRecord::Migration
     create_table :custom_field_values do |t|
       t.references :custom_field
       t.references :customized, polymorphic: true
-      t.string :value
+      t.text :value
       t.string :document
       t.string :image
       t.text :raw_value
