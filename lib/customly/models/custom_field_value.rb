@@ -52,7 +52,7 @@ module Customly
         end
 
         def value
-          if supports_upload?
+          if supports_upload? && !value_changed?
             self.send(field_type.gsub('_upload', '')).try(:url)
           else
             self.read_attribute(:value)
