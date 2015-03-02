@@ -25,6 +25,12 @@ module Customly
 
     #== CALLBACKS
 
+    before_validation def reject_blank
+      if self.value.is_a? Array
+        self.value.reject!(&:blank?) 
+      end
+    end    
+
     before_validation def sync_raw_value
       self.raw_value = self.value
     end
