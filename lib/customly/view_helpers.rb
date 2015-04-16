@@ -18,9 +18,8 @@ module Customly
 
         field = nil
         value = (new_value || cfv.value || cf.default_value)
-
         if ft.custom_render?
-          opts = {form: form, cfv: cfv, value: value}
+          opts = {form: form, cfv: cfv, value: value, html_options: html_options}
           field = self.instance_exec(opts, &ft.render)
         else
           field = case ft.input_type
