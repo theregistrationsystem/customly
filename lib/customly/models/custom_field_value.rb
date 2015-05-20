@@ -10,7 +10,7 @@ module Customly
 
     #== VALIDATIONS
     validates :customized, presence: true
-    validates :custom_field, presence: true
+    validates :custom_field, presence: true, uniqueness: {scope: :customized} 
     validate { (Customly.configuration.validations[:custom_field_value] || []).each { |blk| blk.call self } }
     validates :value, presence: true, if: -> { is_required && !supports_upload? && !customized.try(:skip_custom_field_value_validation) }
     validates :document, presence: true, if: -> { is_required && (input_type == :document_upload) && !customized.try(:skip_custom_field_value_validation) }
