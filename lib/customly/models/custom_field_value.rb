@@ -2,7 +2,6 @@ require 'carrierwave/orm/activerecord'
 
 module Customly
   class CustomFieldValue < ActiveRecord::Base
-    include Paperclip::Glue
 
     #== ASSOCIATIONS
     belongs_to :custom_field, inverse_of: :custom_field_values
@@ -42,6 +41,7 @@ module Customly
     concerning :Uploads do
       included do
 
+        ActiveRecord::Base.raise_in_transactional_callbacks = true
         mount_uploader :document, Customly::DocumentUploader
         mount_uploader :image, Customly::ImageUploader
 
