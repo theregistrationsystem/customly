@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Ahmad Hammad"]
   s.email       = ["ahmad@buttercloud.com"]
   s.homepage    = "http://www.buttercloud.com"
-  s.summary     = "Summary of Customly."
-  s.description = "Description of Customly."
+  s.summary     = "Provide Custom Field functionality with flexible scoping"
+  s.description = "Creates two SQL tables to store and associate custom fields and provides mixins to automatically add associations to models and provide helper functions"
   s.license     = "MIT"
 
 
