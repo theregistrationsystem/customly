@@ -1,4 +1,4 @@
-Adds advanced custom fields support to your application. 
+Adds advanced custom field support to your application. 
 
 # Setup
 
@@ -85,7 +85,7 @@ end
 
   - render
 
-    A proc to override the default rendering. The proc takes a single hash argument with the folling key-values:
+    A proc to override the default rendering. The proc takes a single hash argument with the following key-values:
     - form: form object
     - cfv: CustomFieldValue instance
     - value: current value
@@ -144,7 +144,7 @@ Assuming Organization ABC has 3 custom fields:
 2) What is your age?
 3) ID upload.
 
-Person's belonging to Team A might only need to fill out custom fields 1 & 2. 
+Persons belonging to Team A might only need to fill out custom fields 1 & 2. 
 That is to say the custom fields 1 & 2 are scoped to Team A. 
 
 You can go further by using flags. You can say a Person of type `:guest` belonging to Team A 
