@@ -1,7 +1,4 @@
-= Customly
-
 Adds advanced custom fields support to your application. 
-Custom fields belong to a `parent` model that owns the custom fields. 
 
 # Setup
 
