@@ -8,7 +8,7 @@ Adds advanced custom fields support to your application.
 
 ## config
 
-You define you custom field types in a config file:
+You first define your custom field types in a config file:
 
 - Create a customly.config file under `config/initializers`
 
